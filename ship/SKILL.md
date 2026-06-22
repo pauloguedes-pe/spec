@@ -35,11 +35,20 @@ digraph ship_flow {
 }
 ```
 
+## Invocação obrigatória das skills
+
+A cada etapa do loop, **use o Skill tool** para invocar as skills correspondentes — não execute a lógica inline:
+
+- **Build:** invoque a skill `build` via Skill tool com o nome da spec
+- **Review:** invoque a skill `review` via Skill tool com o nome da spec
+
+Isso garante que cada etapa siga rigorosamente as regras da skill correspondente.
+
 ## Regras do loop
 
 - **Não interrompa para perguntar.** Qualquer ambiguidade deve ser resolvida lendo a spec. Só interrompa se a spec for genuinamente contraditória.
-- **Cada iteração começa com o /review anterior.** As correções listadas no review são o único input para a próxima rodada de /build.
-- **Não adicione nada além das correções.** O /build de correção implementa exatamente o que o /review listou, nada mais.
+- **Cada iteração começa com o /review anterior.** As correções listadas no review são o único input para a próxima rodada de build.
+- **Não adicione nada além das correções.** A build de correção implementa exatamente o que o review listou, nada mais.
 - **Limite: 5 iterações.** Se não aprovado após 5 rodadas, pare, reporte o estado atual e as falhas restantes, e aguarde orientação do usuário.
 
 ## Como aplicar correções entre iterações
@@ -49,7 +58,7 @@ Após um review REPROVADO:
 1. Liste as falhas em ordem de dependência (resolva dependências primeiro)
 2. Implemente cada correção conforme descrita no review — sem interpretação livre
 3. Não altere código não mencionado nas correções
-4. Execute /review novamente
+4. Invoque a skill `review` novamente via Skill tool
 
 ## Saída ao concluir
 
